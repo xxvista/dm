@@ -1,1 +1,2129 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="icon" href="/favicon.ico"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="theme-color" content="#000000"/><meta name="description" content="Web site created using create-react-app"/><link rel="apple-touch-icon" href="/logo192.png"/><link rel="manifest" href="/manifest.json"/><title>React App</title><script defer="defer" src="/static/js/main.ca326c09.js"></script><link href="/static/css/main.8490e4f2.css" rel="stylesheet"></head><body><noscript>You need to enable JavaScript to run this app.</noscript><div id="root"></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Undirect message</title> 
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><defs><radialGradient id=%22g%22 cx=%2250%25%22 cy=%2250%25%22 r=%2250%25%22 fx=%2250%25%22 fy=%2250%25%22><stop offset=%220%25%22 style=%22stop-color:rgb(255,160,0);stop-opacity:1%22 /><stop offset=%2250%25%22 style=%22stop-color:rgb(255,111,0);stop-opacity:0.8%22 /><stop offset=%22100%25%22 style=%22stop-color:rgb(255,111,0);stop-opacity:0%22 /></radialGradient></defs><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22url(%23g)%22 /><text x=%2250%22 y=%2268%22 font-family=%22'Cormorant Garamond', serif%22 font-size=%2250%22 fill=%22%23fbf8f5%22 text-anchor=%22middle%22 style=%22filter: drop-shadow(0 0 3px rgba(255,111,0,0.7));%22>U</text></svg>" /* MODIFIED (L to U) */
+    />
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap");
+
+  :root {
+    --color-bg-deep-ash: #171312;
+    --color-panel-cream: #fbf8f5;
+    --color-panel-cream-rgb: 251, 248, 245;
+    --color-panel-highlight: #ffffff;
+    --color-panel-shadow-dark: rgba(210, 200, 190, 0.35);
+
+    --color-ember-orange: #ff6f00;
+    --color-ember-orange-rgb: 255, 111, 0;
+    --color-ember-orange-transparent: rgba(
+      var(--color-ember-orange-rgb),
+      0
+    );
+    --color-ember-orange-flare: rgba(var(--color-ember-orange-rgb), 0.95);
+    --color-ember-orange-radiance: rgba(var(--color-ember-orange-rgb), 0.7);
+    --color-ember-orange-medium-alpha: rgba(
+      var(--color-ember-orange-rgb),
+      0.45
+    );
+    --color-ember-orange-low-alpha: rgba(
+      var(--color-ember-orange-rgb),
+      0.15
+    );
+    --color-ember-orange-aura-faint: rgba(255, 111, 0, 0.08);
+    --color-ember-orange-radiance-soft: rgba(
+      var(--color-ember-orange-rgb),
+      0.3
+    );
+
+    --color-border-textbox-default: #d7cfc7;
+
+    --color-text-heading: #362c28;
+    --color-text-body: #4c403c;
+    --color-text-placeholder: #a09088;
+    --color-text-subtle: #70625c;
+    --color-ash-text-hover: #9d8f87;
+
+    --color-footer-text: rgba(200, 184, 176, 0.7);
+    --color-footer-link-hover: var(--color-ember-orange);
+    --footer-bg-start-v2: rgba(28, 25, 24, 0.3);
+    --footer-bg-end-v2: rgba(23, 19, 18, 0.05);
+    --footer-final-opacity: 0.9;
+
+    --font-hero: "Cormorant Garamond", serif;
+    --font-ui: "Inter", sans-serif;
+
+    --panel-extrusion-offset-desktop: 28px;
+    --panel-extrusion-blur-desktop: 56px;
+    --panel-extrusion-offset-mobile: 16px;
+    --panel-extrusion-blur-mobile: 32px;
+    --panel-extrusion-offset: var(--panel-extrusion-offset-desktop);
+    --panel-extrusion-blur: var(--panel-extrusion-blur-desktop);
+    --panel-shadow-extrude-light-src: rgba(62, 54, 52, 0.3);
+    --panel-shadow-extrude-dark-src: rgba(8, 6, 5, 0.4);
+
+    --color-light-shard: rgba(255, 200, 150, 0.9);
+    --color-light-shard-glow: rgba(255, 140, 50, 0.6);
+
+    --new-button-primary: var(--color-ember-orange);
+    --new-button-neutral-1: var(--color-panel-cream);
+    --new-button-neutral-2: #f5f1ee;
+    --new-button-radius: 14px;
+    --new-button-text-color: #3a302c;
+    --new-button-text-shadow: rgba(0, 0, 0, 0.1);
+    --new-button-icon-color: var(--new-button-text-color);
+
+    --el-distance: 3.5px;
+    --el-blur: 8px;
+    --el-shadow-color-light: var(--color-panel-highlight);
+    --el-shadow-color-dark: var(--color-panel-shadow-dark);
+
+    --sent-light-core: var(--color-ember-orange-flare);
+    --sent-light-mid-glow: var(--color-ember-orange-radiance);
+    --sent-light-outer-glow: var(--color-ember-orange-medium-alpha);
+    --sent-light-faintest-glow: var(--color-ember-orange-low-alpha);
+
+    --letter-spacing-hero: 0.015em;
+    --letter-spacing-button: 0.025em;
+
+    --body-fade-in-duration: 0.35s;
+    --body-fade-in-delay: 0.02s;
+    --genesis-appear-duration-v_provided: 1s;
+    --genesis-orbit-duration-v_provided: 1.3s;
+    --genesis-appear-delay-v_provided: 0.2s;
+
+    --genesis-entry-delay: calc(
+      var(--body-fade-in-delay) + var(--body-fade-in-duration) * 0.05 +
+        var(--genesis-appear-delay-v_provided)
+    );
+
+    --panel-settle-duration: 0.9s;
+    --panel-settle-delay: calc(
+      var(--genesis-entry-delay) + var(--genesis-appear-duration-v_provided) *
+        0.85
+    );
+
+    --content-cascade-base-delay: calc(
+      var(--panel-settle-delay) + var(--panel-settle-duration) * 0.45
+    );
+    --hero-message-delay: calc(var(--content-cascade-base-delay) + 0.05s);
+    --textarea-delay: calc(var(--hero-message-delay) + 0.08s);
+    --button-delay: calc(var(--textarea-delay) + 0.08s);
+    --footer-delay: calc(var(--button-delay) + 0.15s + 1s);
+
+    --panel-animation-duration-val: 1.2s;
+    --encore-duration-base: 1s;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-bg-deep-ash);
+    font-family: var(--font-ui);
+    color: var(--color-text-body);
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px) + 60px);
+    opacity: 0;
+    animation: bodyFadeIn var(--body-fade-in-duration) ease-out
+      var(--body-fade-in-delay) forwards;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    position: relative;
+    transition: background-color 0.75s ease-in-out;
+  }
+  @keyframes bodyFadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  .genesis-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    transform: translate(-50%, -50%);
+    z-index: -2;
+    pointer-events: none;
+    opacity: 0;
+    animation: genesisAppear var(--genesis-appear-duration-v_provided)
+      cubic-bezier(0.215, 0.61, 0.355, 1) var(--genesis-entry-delay)
+      forwards;
+  }
+  .genesis-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--color-ember-orange);
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(2px);
+    animation: orbitAndIgnite var(--genesis-orbit-duration-v_provided)
+      ease-in-out infinite;
+  }
+  .genesis-particle:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .genesis-particle:nth-child(2) {
+    animation-delay: calc(var(--genesis-orbit-duration-v_provided) * -0.25);
+    transform-origin: 30px 0;
+  }
+  .genesis-particle:nth-child(3) {
+    animation-delay: calc(var(--genesis-orbit-duration-v_provided) * -0.5);
+    transform-origin: 0 30px;
+  }
+  .genesis-particle:nth-child(4) {
+    animation-delay: calc(var(--genesis-orbit-duration-v_provided) * -0.75);
+    transform-origin: -30px 0;
+  }
+  @keyframes genesisAppear {
+    0% {
+      opacity: 0;
+    }
+    10%,
+    80% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes orbitAndIgnite {
+    0% {
+      transform: rotate(0deg) translateX(40px) scale(0.5);
+      opacity: 0.5;
+    }
+    50% {
+      transform: rotate(180deg) translateX(20px) scale(1);
+      opacity: 0.9;
+      filter: blur(1px);
+    }
+    90% {
+      transform: rotate(350deg) translateX(5px) scale(1.5);
+      opacity: 1;
+      filter: blur(0px);
+      box-shadow: 0 0 15px 5px var(--color-ember-orange-medium-alpha);
+    }
+    100% {
+      transform: rotate(360deg) translateX(0px) scale(0);
+      opacity: 0;
+    }
+  }
+
+  .particle-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.6s ease-out;
+  }
+  .particle-container.active {
+    opacity: 1;
+  }
+  .particle-container.celestial-dust .particle {
+    width: 2.2px;
+    height: 2.2px;
+    animation-duration: 3.5s;
+    box-shadow: 0 0 5.5px 1.3px var(--color-ember-orange-medium-alpha);
+  }
+  .particle {
+    position: absolute;
+    background-color: var(--color-ember-orange);
+    border-radius: 50%;
+    opacity: 0;
+    animation: starfallDeluxe 5.5s ease-out infinite;
+    width: 1.9px;
+    height: 1.9px;
+    box-shadow: 0 0 4.5px 1px var(--color-ember-orange-low-alpha);
+    will-change: transform, opacity;
+  }
+  @keyframes starfallDeluxe {
+    0% {
+      transform: translateY(110vh) translateX(var(--x-start))
+        scale(var(--s-start, 0.32));
+      opacity: 0;
+    }
+    15% {
+      opacity: var(--o-peak, 0.75);
+    }
+    85% {
+      filter: blur(1px);
+    }
+    100% {
+      transform: translateY(-10vh) translateX(var(--x-end))
+        scale(var(--s-end, 1.15));
+      opacity: 0;
+    }
+  }
+
+  .light-shard-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .light-shard {
+    position: absolute;
+    background-color: var(--color-light-shard);
+    opacity: 0;
+    will-change: transform, opacity;
+    box-shadow: 0 0 8px 1.5px var(--color-light-shard-glow),
+      0 0 12px 3px var(--color-light-shard-glow);
+    animation-name: lightShardFlyUp;
+  }
+  @keyframes lightShardFlyUp {
+    0% {
+      opacity: 0;
+      transform: translate(var(--shard-tx-start), var(--shard-ty-start))
+        rotate(var(--shard-rotate-start))
+        scale(var(--shard-scale-start, 0.3));
+    }
+    20% {
+      opacity: var(--shard-opacity-peak, 1);
+    }
+    80% {
+      opacity: calc(var(--shard-opacity-peak, 1) * 0.8);
+      filter: blur(0.5px);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--shard-tx-end), var(--shard-ty-end))
+        rotate(var(--shard-rotate-end)) scale(var(--shard-scale-end, 0.05));
+      filter: blur(2px);
+    }
+  }
+
+  .content-panel {
+    background: var(--color-panel-cream);
+    border-radius: clamp(35px, 10vw, 70px);
+    padding: clamp(2.5rem, 7vh, 4.5rem) clamp(1rem, 4.5vw, 2.2rem);
+    width: 100%;
+    max-width: 500px;
+    min-height: clamp(380px, 60vh, 550px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    margin-bottom: 1rem;
+    box-shadow: calc(var(--panel-extrusion-offset) * -1)
+        calc(var(--panel-extrusion-offset) * -1)
+        calc(var(--panel-extrusion-blur) * 0.9)
+        var(--panel-shadow-extrude-light-src),
+      calc(var(--panel-extrusion-offset) * 1)
+        calc(var(--panel-extrusion-offset) * 1)
+        calc(var(--panel-extrusion-blur) * 0.9)
+        var(--panel-shadow-extrude-dark-src),
+      inset 5px 5px 10px var(--color-panel-shadow-dark),
+      inset -5px -5px 10px var(--color-panel-highlight);
+    opacity: 0;
+    transform: perspective(1800px) translateY(3rem) rotateX(12deg)
+      rotateY(-3deg) scale(0.88);
+    animation: panelSculptedSettle var(--panel-settle-duration)
+      cubic-bezier(0.16, 1, 0.3, 1) var(--panel-settle-delay) forwards;
+    transition: box-shadow 0.4s ease, transform 0.4s ease,
+      opacity 0.4s ease-out;
+    will-change: opacity, transform, box-shadow;
+    transform-origin: 50% 75%;
+  }
+  .content-panel:not(.no-hover-effect):hover {
+    transform: perspective(1800px) translateY(-6px) rotateX(2.5deg)
+      rotateY(-1deg) scale(1.015);
+    box-shadow: calc(var(--panel-extrusion-offset) * -1.1)
+        calc(var(--panel-extrusion-offset) * -1.1)
+        calc(var(--panel-extrusion-blur) * 1)
+        var(--panel-shadow-extrude-light-src),
+      calc(var(--panel-extrusion-offset) * 1.1)
+        calc(var(--panel-extrusion-offset) * 1.1)
+        calc(var(--panel-extrusion-blur) * 1)
+        var(--panel-shadow-extrude-dark-src),
+      inset 7px 7px 13px var(--color-panel-shadow-dark),
+      inset -7px -7px 13px var(--color-panel-highlight);
+    animation: panelBreathingLight 6s ease-in-out infinite,
+      panelSculptedSettle var(--panel-settle-duration)
+        cubic-bezier(0.16, 1, 0.3, 1) var(--panel-settle-delay) forwards;
+  }
+  @keyframes panelSculptedSettle {
+    0% {
+      opacity: 0;
+      transform: perspective(1800px) translateY(3rem) rotateX(12deg)
+        rotateY(-3deg) scale(0.88);
+    }
+    to {
+      opacity: 1;
+      transform: perspective(1800px) translateY(0) rotateX(0deg)
+        rotateY(0deg) scale(1);
+    }
+  }
+  @keyframes panelBreathingLight {
+    0%,
+    100% {
+      box-shadow: calc(var(--panel-extrusion-offset) * -1.1)
+          calc(var(--panel-extrusion-offset) * -1.1)
+          calc(var(--panel-extrusion-blur) * 1)
+          var(--panel-shadow-extrude-light-src),
+        calc(var(--panel-extrusion-offset) * 1.1)
+          calc(var(--panel-extrusion-offset) * 1.1)
+          calc(var(--panel-extrusion-blur) * 1)
+          var(--panel-shadow-extrude-dark-src),
+        inset 7px 7px 13px var(--color-panel-shadow-dark),
+        inset -7px -7px 13px var(--color-panel-highlight),
+        0 0 15px 0px rgba(var(--color-ember-orange-rgb), 0.05);
+    }
+    50% {
+      box-shadow: calc(var(--panel-extrusion-offset) * -1.1)
+          calc(var(--panel-extrusion-offset) * -1.1)
+          calc(var(--panel-extrusion-blur) * 1)
+          var(--panel-shadow-extrude-light-src),
+        calc(var(--panel-extrusion-offset) * 1.1)
+          calc(var(--panel-extrusion-offset) * 1.1)
+          calc(var(--panel-extrusion-blur) * 1)
+          var(--panel-shadow-extrude-dark-src),
+        inset 7px 7px 13px var(--color-panel-shadow-dark),
+        inset -7px -7px 13px var(--color-panel-highlight),
+        0 0 25px 3px rgba(var(--color-ember-orange-rgb), 0.1);
+    }
+  }
+
+  .content-panel.encore-flash::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      ellipse at 50% 70%,
+      rgba(255, 220, 180, 0.38) 0%,
+      rgba(255, 200, 150, 0) 53%
+    );
+    opacity: 0;
+    border-radius: inherit;
+    z-index: 1;
+    pointer-events: none;
+    animation: panelIgnitionFlash 0.28s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+  @keyframes panelIgnitionFlash {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.015);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1);
+    }
+  }
+  .content-panel.panel-fade-out-radiance {
+    animation: panelSentRadianceFinal var(--panel-animation-duration-val)
+      ease-out forwards;
+  }
+  @keyframes panelSentRadianceFinal {
+    0% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      box-shadow: calc(var(--panel-extrusion-offset) * -1)
+          calc(var(--panel-extrusion-offset) * -1)
+          calc(var(--panel-extrusion-blur) * 0.9)
+          var(--panel-shadow-extrude-light-src),
+        calc(var(--panel-extrusion-offset) * 1)
+          calc(var(--panel-extrusion-offset) * 1)
+          calc(var(--panel-extrusion-blur) * 0.9)
+          var(--panel-shadow-extrude-dark-src),
+        inset 5px 5px 10px var(--color-panel-shadow-dark),
+        inset -5px -5px 10px var(--color-panel-highlight);
+    }
+    30% {
+      opacity: 0.98;
+      transform: scale(1.02) translateY(0);
+      box-shadow: 0 0 35px 10px var(--color-ember-orange-radiance),
+        0 0 60px 20px var(--color-ember-orange-medium-alpha),
+        inset 0 0 20px 3px var(--color-ember-orange-low-alpha);
+    }
+    95% {
+      opacity: 0.05;
+      transform: scale(0.92) translateY(15px);
+      box-shadow: 0 0 70px 25px var(--color-ember-orange-transparent),
+        0 0 100px 40px var(--color-ember-orange-transparent),
+        inset 0 0 5px 1px var(--color-ember-orange-transparent);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.9) translateY(20px);
+      box-shadow: 0 0 70px 25px var(--color-ember-orange-transparent),
+        0 0 100px 40px var(--color-ember-orange-transparent),
+        inset 0 0 5px 1px var(--color-ember-orange-transparent);
+    }
+  }
+
+  .hero-message,
+  .message-textarea-wrapper,
+  .send-button-wrapper {
+    opacity: 0;
+    transform: translateY(25px);
+    will-change: opacity, transform;
+  }
+  .hero-message {
+    font-family: var(--font-hero);
+    font-size: clamp(1.5rem, 4.5vw, 1.8rem);
+    line-height: 1.4;
+    font-weight: 400;
+    color: var(--color-text-heading);
+    margin-bottom: clamp(1.8rem, 5.5vh, 2.5rem);
+    letter-spacing: var(--letter-spacing-hero);
+    animation: contentCascadeInMaster 0.55s ease-out
+      var(--hero-message-delay) forwards;
+  }
+  @keyframes contentCascadeInMaster {
+    0% {
+      opacity: 0;
+      transform: translateY(16px) scale(0.97);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0px);
+    }
+  }
+  .ash-text {
+    color: var(--color-text-subtle);
+    font-style: italic;
+    display: inline-block;
+    animation: shadowsDisperseAndSettle 0.9s ease-out
+        var(--hero-message-delay) forwards,
+      shadowsWaver 9s ease-in-out calc(var(--hero-message-delay) + 1s)
+        infinite;
+    transform-origin: center bottom;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+  }
+  .ash-text:hover {
+    color: var(--color-ash-text-hover);
+    text-shadow: 0 0 4px rgba(var(--color-ember-orange-rgb), 0.12);
+  }
+  @keyframes shadowsDisperseAndSettle {
+    0% {
+      letter-spacing: 0.15em;
+      transform: translateY(3px) scale(1.06);
+      filter: blur(1.1px);
+    }
+    60% {
+      letter-spacing: 0.03em;
+      filter: blur(0.25px);
+    }
+    100% {
+      letter-spacing: normal;
+      transform: translateY(0px) scale(1);
+      filter: blur(0px);
+    }
+  }
+  @keyframes shadowsWaver {
+    0%,
+    100% {
+      text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.05);
+      transform: translateY(0);
+    }
+    50% {
+      text-shadow: -0.5px -0.5px 1px rgba(0, 0, 0, 0.03);
+      transform: translateY(-0.4px);
+    }
+  }
+
+  .ember-glow {
+    color: var(--color-ember-orange);
+    display: inline-block;
+    position: relative;
+    animation: initialLightPulse 1.1s cubic-bezier(0.4, 0, 0.2, 1)
+        calc(var(--hero-message-delay) + 0.1s) 1,
+      livingFlameEternal 4.2s infinite ease-in-out
+        calc(var(--hero-message-delay) + 1.2s);
+    cursor: pointer;
+    transition: transform 0.2s ease, text-shadow 0.2s ease, filter 0.2s ease,
+      color 0.2s ease;
+    will-change: transform, text-shadow, filter, color;
+    transform-origin: center center;
+  }
+  .ember-glow--activated {
+    animation: emberGlowActivatePulse 0.6s ease-out forwards !important;
+  }
+  @keyframes initialLightPulse {
+    0% {
+      transform: scale(1);
+      text-shadow: 0 0 3.5px var(--color-ember-orange-low-alpha);
+      opacity: 0.9;
+    }
+    30% {
+      transform: scale(1.07) translateY(-1.3px);
+      text-shadow: 0 0 8px var(--color-ember-orange-medium-alpha),
+        0 0 16px var(--color-ember-orange-low-alpha),
+        0 0 3.5px var(--color-ember-orange-flare);
+      opacity: 1;
+    }
+    60% {
+      transform: scale(1.03);
+      text-shadow: 0 0 4.5px var(--color-ember-orange-medium-alpha);
+      opacity: 0.95;
+    }
+    100% {
+      transform: scale(1);
+      text-shadow: 0 0 3.5px var(--color-ember-orange-low-alpha);
+      opacity: 0.9;
+    }
+  }
+  @keyframes livingFlameEternal {
+    0%,
+    100% {
+      text-shadow: 0 0 2.5px var(--color-ember-orange-low-alpha),
+        0 0 0.8px var(--color-ember-orange);
+      transform: scale(1) translateY(0) skewX(0deg);
+      opacity: 0.9;
+    }
+    25% {
+      text-shadow: 0 0 5.5px var(--color-ember-orange-medium-alpha),
+        0 0 11px var(--color-ember-orange-low-alpha),
+        0 0 1.8px var(--color-ember-orange-flare);
+      transform: scale(1.025) translateY(-0.8px) skewX(-1.3deg);
+      opacity: 1;
+    }
+    50% {
+      text-shadow: 0 0 3.5px var(--color-ember-orange),
+        0 0 7px var(--color-ember-orange-medium-alpha);
+      transform: scale(1.04) translateY(0.4px) skewX(0.8deg);
+      opacity: 0.95;
+    }
+    75% {
+      text-shadow: 0 0 6px var(--color-ember-orange-medium-alpha),
+        0 0 12px var(--color-ember-orange-low-alpha),
+        0 0 2.5px var(--color-ember-orange-flare);
+      transform: scale(1.015) translateY(-0.4px) skewX(-0.8deg);
+      opacity: 1;
+    }
+  }
+  .ember-glow:hover:not(.ember-glow--activated) {
+    text-shadow: 0 0 10px var(--color-ember-orange-flare),
+      0 0 22px var(--color-ember-orange-radiance),
+      0 0 35px var(--color-ember-orange-medium-alpha);
+    transform: scale(1.06) translateY(-0.8px);
+    filter: brightness(1.06);
+  }
+  @keyframes emberGlowActivatePulse {
+    0% {
+      transform: scale(1);
+      text-shadow: 0 0 6px var(--color-ember-orange-radiance);
+      filter: brightness(1.1);
+    }
+    50% {
+      transform: scale(1.15) translateY(-1px);
+      text-shadow: 0 0 12px var(--color-ember-orange-flare),
+        0 0 25px var(--color-ember-orange-radiance);
+      filter: brightness(1.3);
+      color: #fff5eb;
+    }
+    100% {
+      transform: scale(1);
+      text-shadow: 0 0 7px var(--color-ember-orange-radiance);
+      filter: brightness(1.15);
+    }
+  }
+  .ember-glow.grand-radiance {
+    animation: grandLightRadiance calc(var(--encore-duration-base) * 0.3)
+        ease-out forwards,
+      livingFlameEternal 3.8s infinite ease-in-out
+        calc(var(--encore-duration-base) * 0.3 + 0.05s);
+  }
+  @keyframes grandLightRadiance {
+    0% {
+      transform: scale(1.05);
+      filter: brightness(1.06);
+    }
+    50% {
+      transform: scale(1.25) translateY(-1.6px);
+      text-shadow: 0 0 3px #fff, 0 0 9px var(--color-ember-orange-flare),
+        0 0 20px var(--color-ember-orange-radiance);
+      color: #fff;
+      filter: brightness(1.5);
+    }
+    100% {
+      transform: scale(1.08) translateY(-0.3px);
+      text-shadow: 0 0 1.2px #fff, 0 0 6px var(--color-ember-orange-flare),
+        0 0 11px var(--color-ember-orange-radiance);
+      color: var(--color-ember-orange);
+      filter: brightness(1.18);
+    }
+  }
+
+  .message-textarea-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    border-radius: calc(1.5rem + 3px);
+    transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: contentCascadeInMaster 0.55s ease-out var(--textarea-delay)
+      forwards;
+  }
+  .message-textarea-wrapper.focused {
+    box-shadow: none;
+  }
+  .message-textarea {
+    width: 100%;
+    min-height: clamp(120px, 20vh, 160px);
+    background: transparent !important;
+    border: 3px solid var(--color-border-textbox-default);
+    box-shadow: none;
+    border-radius: 1.5rem;
+    padding: clamp(1rem, 3vh, 1.35rem);
+    font-family: var(--font-ui);
+    font-size: clamp(0.85rem, 2.5vw, 0.92rem);
+    color: var(--color-text-body);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.4s ease, background-color 0.4s ease,
+      box-shadow 0.4s ease, color 0.4s ease;
+    caret-color: var(--color-ember-orange);
+  }
+  .message-textarea::placeholder {
+    color: var(--color-text-placeholder);
+    font-style: italic;
+    font-weight: 300;
+    transition: opacity 0.3s ease;
+    opacity: 0; 
+    animation: placeholderSubtleEntry 0.8s ease-out
+      calc(var(--textarea-delay) + 0.55s + 0.2s) forwards;
+  }
+  @keyframes placeholderSubtleEntry {
+    0% {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .message-textarea:focus {
+    background: rgba(var(--color-ember-orange-aura-faint), 0.15) !important;
+    color: var(--color-text-heading);
+    border-width: 3px;
+    border-style: solid;
+    animation: textboxBorderGlowPulseRevised 4s ease-in-out infinite
+      alternate;
+    transform: scale(1);
+  }
+  .message-textarea:focus::placeholder {
+    opacity: 0;
+  }
+  @keyframes textboxBorderGlowPulseRevised {
+    0% {
+      border-color: var(--color-ember-orange-radiance-soft);
+      box-shadow: 0 0 7px 1px var(--color-ember-orange-low-alpha);
+    }
+    50% {
+      border-color: var(--color-ember-orange);
+      box-shadow: 0 0 14px 3px var(--color-ember-orange-medium-alpha),
+        0 0 3px 0 var(--color-ember-orange) inset;
+    }
+    100% {
+      border-color: var(--color-ember-orange-radiance-soft);
+      box-shadow: 0 0 7px 1px var(--color-ember-orange-low-alpha);
+    }
+  }
+  .message-textarea.ember-filled-and-cleared {
+    animation: textareaEmberFillClearV3 1.8s ease-out forwards;
+  }
+  @keyframes textareaEmberFillClearV3 {
+    0% {
+      opacity: 1;
+      background-color: transparent;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      background: radial-gradient(
+        ellipse at center,
+        var(--color-ember-orange-radiance) 0%,
+        var(--color-ember-orange-transparent) 70%
+      );
+      transform: scale(1.01);
+    }
+    100% {
+      opacity: 0;
+      background-color: var(--color-ember-orange-transparent);
+      transform: scale(0.95) translateY(5px);
+    }
+  }
+  .message-textarea::-webkit-scrollbar {
+    width: 8px;
+  }
+  .message-textarea::-webkit-scrollbar-track {
+    background: rgba(var(--color-ember-orange-rgb), 0.05);
+    border-radius: 10px;
+  }
+  .message-textarea::-webkit-scrollbar-thumb {
+    background-color: rgba(var(--color-ember-orange-rgb), 0.4);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  .message-textarea::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(var(--color-ember-orange-rgb), 0.55);
+  }
+
+  .mote-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-radius: inherit;
+    overflow: hidden;
+  }
+  .mote {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: var(--color-ember-orange);
+    border-radius: 50%;
+    opacity: 0;
+    box-shadow: 0 0 4px 1px var(--color-ember-orange-medium-alpha);
+    animation: moteDriftUp 0.7s ease-out forwards;
+    will-change: transform, opacity;
+  }
+  @keyframes moteDriftUp {
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-55px) scale(0.15)
+        translateX(var(--mote-drift-x));
+    }
+  }
+  .message-textarea.clearing-for-motes {
+    color: transparent !important;
+    caret-color: transparent !important;
+  }
+
+  .send-button-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    animation: contentCascadeInMaster 0.55s ease-out var(--button-delay)
+      forwards;
+    margin-top: clamp(1.5rem, 4.5vh, 2.2rem);
+  }
+  .button {
+    --primary: var(--new-button-primary);
+    --neutral-1: var(--new-button-neutral-1);
+    --neutral-2: var(--new-button-neutral-2);
+    --radius: var(--new-button-radius);
+    box-shadow: calc(var(--el-distance) * -1) calc(var(--el-distance) * -1)
+        calc(var(--el-blur) * 0.8) var(--el-shadow-color-light),
+      var(--el-distance) var(--el-distance) calc(var(--el-blur) * 0.8)
+        var(--el-shadow-color-dark),
+      inset 0.5px 0.5px 1px rgba(255, 255, 255, 0.2),
+      inset -0.5px -0.5px 1px rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+    border-radius: var(--radius);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.18s cubic-bezier(0.165, 0.84, 0.44, 1),
+      opacity 0.2s ease-out, transform 0.2s ease-out;
+    min-width: 170px;
+    padding: 16px 28px;
+    height: 56px;
+    font-family: var(--font-ui);
+    font-style: normal;
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--new-button-text-color);
+    text-shadow: var(--new-button-text-shadow);
+    letter-spacing: var(--letter-spacing-button);
+    will-change: transform, box-shadow, opacity;
+  }
+  .button:hover:not(:disabled):not(.js-button-sending):not(
+      .js-button-sent
+    ) {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: calc(var(--el-distance) * -1.6)
+        calc(var(--el-distance) * -1.6) calc(var(--el-blur) * 1.1)
+        var(--el-shadow-color-light),
+      calc(var(--el-distance) * 1.6) calc(var(--el-distance) * 1.6)
+        calc(var(--el-blur) * 1.1) var(--el-shadow-color-dark),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.3),
+      inset -1px -1px 2px rgba(0, 0, 0, 0.03);
+  }
+  .button:active:not(:disabled):not(.js-button-sending):not(
+      .js-button-sent
+    ) {
+    transform: translateY(0.5px) scale(0.99);
+    box-shadow: inset var(--el-distance) var(--el-distance) var(--el-blur)
+        var(--el-shadow-color-dark),
+      inset calc(var(--el-distance) * -1) calc(var(--el-distance) * -1)
+        var(--el-blur) var(--el-shadow-color-light);
+  }
+  .button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    color: var(--color-text-subtle);
+    background-color: #f1eeeb;
+    box-shadow: inset var(--el-distance) var(--el-distance) var(--el-blur)
+        var(--el-shadow-color-dark),
+      inset calc(var(--el-distance) * -1) calc(var(--el-distance) * -1)
+        var(--el-blur) var(--el-shadow-color-light);
+  }
+  .button:disabled p,
+  .button:disabled .icon {
+    opacity: 0.7;
+  }
+  .button:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius);
+    border: 1.5px solid transparent;
+    background: linear-gradient(var(--neutral-1), var(--neutral-2))
+        padding-box,
+      linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.1),
+          rgba(0, 0, 0, 0.05)
+        )
+        border-box;
+    z-index: 0;
+    transition: all 0.2s ease;
+    pointer-events: none;
+  }
+  .button:hover:not(:disabled):not(.js-button-sending):not(
+      .js-button-sent
+    )::after {
+    box-shadow: inset 0 -0.5px 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  .button::before {
+    content: "";
+    inset: 1.5px;
+    position: absolute;
+    background: linear-gradient(
+      to top,
+      var(--neutral-1) 95%,
+      var(--neutral-2) 100%
+    );
+    border-radius: calc(var(--radius) - 1.5px);
+    z-index: -1;
+  }
+  .button .state {
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .button .state--default,
+  .button .state--sent {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+  .button.js-button-sent .state--sent {
+    color: var(--primary) !important;
+  }
+  .button .state p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .button .state .icon {
+    position: relative;
+    transform: scale(1.05);
+    transition: all 0.2s ease, color 0.1s ease, opacity 0.2s ease,
+      visibility 0.2s ease;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-right: 0.45em;
+    color: var(--new-button-icon-color);
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .button.js-button-sent .state--sent .icon {
+    order: -1 !important;
+    margin-right: 0.4em !important;
+    margin-left: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: var(--primary) !important;
+    width: 1.1em !important;
+    height: 1.1em !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .button.js-button-sent .state--sent .icon svg {
+    width: 100% !important;
+    height: 100% !important;
+    fill: currentColor !important;
+    display: block !important;
+  }
+  .button.js-button-sent .state--sent p {
+    order: 0;
+    display: inline-flex;
+    align-items: center;
+  }
+  .button .state .icon svg g {
+    filter: url(#shadowSendButtonUiverse);
+  }
+  .button.js-button-sent .state--sent .icon svg g {
+    filter: url(#shadowSentIconUiverse);
+  }
+  .outline {
+    position: absolute;
+    border-radius: inherit;
+    overflow: hidden;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    inset: -1.5px -2.5px;
+    pointer-events: none;
+  }
+  .outline::before {
+    content: "";
+    position: absolute;
+    inset: -150%;
+    background: conic-gradient(
+      from 90deg at 50% 50%,
+      var(--color-ember-orange-transparent) 0%,
+      var(--color-ember-orange-transparent) 50%,
+      var(--primary) 75%,
+      var(--primary) 85%,
+      var(--primary) 95%,
+      var(--color-ember-orange-transparent) 100%
+    );
+    animation: spinOutlineUiverse 1.6s linear infinite;
+    animation-play-state: paused;
+  }
+  @keyframes spinOutlineUiverse {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  .button:hover:not(:disabled):not(.js-button-sending):not(.js-button-sent)
+    .outline {
+    opacity: 0.6;
+  }
+  .button:hover:not(:disabled):not(.js-button-sending):not(.js-button-sent)
+    .outline::before {
+    animation-play-state: running;
+  }
+  .button .state p span {
+    display: inline-block;
+    color: inherit;
+  }
+  .state--default p span {
+    opacity: 0;
+    animation: slideDownLettersBase 0.4s
+      cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards calc(var(--i) * 0.015s);
+  }
+  @keyframes slideDownLettersBase {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px) rotate(-15deg);
+      filter: blur(1px);
+    }
+    40% {
+      opacity: 1;
+      transform: translateY(2px) rotate(0);
+      filter: blur(0);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(-1px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .button:hover:not(:disabled):not(.js-button-sending):not(.js-button-sent)
+    .state--default
+    p
+    span {
+    animation: waveLettersUiverseBase 0.28s ease forwards
+      calc(var(--i) * 0.013s);
+  }
+  @keyframes waveLettersUiverseBase {
+    30% {
+      opacity: 1;
+      transform: translateY(2px);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-1.5px);
+      color: var(--primary);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .button.js-button-sending .state--default .icon {
+    animation: uiverseTakeOffPlane 0.45s cubic-bezier(0.6, 0.01, 0.75, 0.45)
+      forwards 0s;
+    color: var(--primary) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  @keyframes uiverseTakeOffPlane {
+    0% {
+      opacity: 1 !important;
+      transform: translateX(0) rotate(0deg) scale(1.05);
+    }
+    100% {
+      opacity: 0 !important;
+      transform: translateX(45px) translateY(-12px) rotate(35deg)
+        scale(0.18);
+    }
+  }
+  .button.js-button-sending .state--default p span {
+    animation: uiverseDisapearLettersUpdated 0.35s
+      cubic-bezier(0.6, 0.01, 0.75, 0.25) forwards calc(var(--i) * 0.015s);
+  }
+  @keyframes uiverseDisapearLettersUpdated {
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1) rotate(0deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(40px) translateY(-30px) scale(0.35)
+        rotate(35deg);
+      color: var(--primary);
+      filter: blur(3px);
+    }
+  }
+  .button.js-button-sending .state--default .icon::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    height: 1.5px;
+    width: 0;
+    left: -3px;
+    background: linear-gradient(to right, transparent, var(--primary));
+    opacity: 0.6;
+    animation: uiverseContrail 0.45s cubic-bezier(0.6, 0.01, 0.75, 0.45)
+      forwards 0s;
+  }
+  @keyframes uiverseContrail {
+    0% {
+      width: 0;
+      opacity: 0.6;
+      transform: translateX(0);
+    }
+    10% {
+      width: 6px;
+    }
+    70% {
+      opacity: 0.3;
+      width: 20px;
+    }
+    100% {
+      opacity: 0;
+      width: 0px;
+      transform: translateX(20px);
+    }
+  }
+  .button.js-button-sent .state--sent p span {
+    animation: uiverseSlideDownSentText 0.4s ease forwards
+      calc(var(--i) * 0.03s);
+  }
+  @keyframes uiverseSlideDownSentText {
+    0% {
+      opacity: 0;
+      transform: translateY(-8px);
+      filter: blur(0.8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0px);
+    }
+  }
+  .button.js-button-sent .state--sent .icon svg {
+    animation: uiverseAppearSentIcon 0.6s
+      cubic-bezier(0.215, 0.61, 0.355, 1) forwards 0.03s !important;
+  }
+  @keyframes uiverseAppearSentIcon {
+    0% {
+      opacity: 0 !important;
+      transform: scale(2.5) rotate(-25deg);
+      filter: blur(2.5px);
+    }
+    30% {
+      opacity: 1 !important;
+      transform: scale(0.75);
+      filter: blur(0.6px);
+    }
+    50% {
+      opacity: 1 !important;
+      transform: scale(1.1);
+      filter: blur(0);
+    }
+    100% {
+      opacity: 1 !important;
+      transform: scale(1);
+    }
+  }
+  .button.js-button-sent.sacred-confirmation {
+    animation: buttonSentPulse 1.7s infinite ease-in-out 0.05s;
+  }
+  @keyframes buttonSentPulse {
+    0%,
+    100% {
+      transform: scale(1);
+      filter: brightness(1);
+    }
+    50% {
+      transform: scale(1.018);
+      filter: brightness(1.05);
+      box-shadow: calc(var(--el-distance) * -1)
+          calc(var(--el-distance) * -1) calc(var(--el-blur) * 0.8)
+          var(--el-shadow-color-light),
+        var(--el-distance) var(--el-distance) calc(var(--el-blur) * 0.8)
+          var(--el-shadow-color-dark),
+        inset 0.5px 0.5px 1px rgba(255, 255, 255, 0.2),
+        inset -0.5px -0.5px 1px rgba(0, 0, 0, 0.02),
+        0 0 4.5px 0.8px var(--color-ember-orange-radiance-soft);
+    }
+  }
+
+  .light-ascend-wisp {
+    position: fixed;
+    width: 5.5px;
+    height: 5.5px;
+    background-color: var(--color-ember-orange-flare);
+    border-radius: 50%;
+    box-shadow: 0 0 6px 2px var(--color-ember-orange-radiance),
+      0 0 11px 4px var(--color-ember-orange-medium-alpha);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 100;
+    will-change: transform, opacity;
+  }
+  @keyframes lightWispTravel {
+    0% {
+      opacity: 0;
+      transform: translate(var(--start-x), var(--start-y)) scale(0.2);
+    }
+    10% {
+      opacity: 0.9;
+    }
+    25% {
+      opacity: 1;
+      transform: translate(var(--mid-x-1), var(--mid-y-1)) scale(0.75);
+    }
+    70% {
+      opacity: 0.95;
+      transform: translate(var(--mid-x-2), var(--mid-y-2)) scale(0.45);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--end-x), var(--end-y)) scale(0.1);
+    }
+  }
+
+  .site-footer {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem 1rem calc(0.8rem + env(safe-area-inset-bottom, 0px))
+      1rem;
+    font-size: clamp(0.7rem, 2.1vw, 0.78rem);
+    font-weight: 400;
+    font-family: var(--font-ui);
+    color: var(--color-footer-text);
+    opacity: 0;
+    animation: footerFadeInV2 1.5s ease-out var(--footer-delay) forwards;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background-image: linear-gradient(
+      to top,
+      var(--footer-bg-start-v2) 0%,
+      var(--footer-bg-end-v2) 75%
+    );
+    transition: opacity 0.4s ease-out;
+    line-height: 1.45;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3em;
+  }
+  @keyframes footerFadeInV2 {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: var(--footer-final-opacity);
+      transform: translateY(0px);
+    }
+  }
+  .site-footer .coded-by,
+  .site-footer .linkedin-link {
+    white-space: nowrap;
+  }
+  .site-footer .heart-icon {
+    color: var(--color-ember-orange);
+    display: inline-block;
+    font-size: 0.95em;
+    margin: 0 0.15em 0 0.25em;
+    transform: translateY(0.12em);
+    animation: footerHeartPulse 2.2s ease-in-out infinite
+      calc(var(--footer-delay) + 0.6s);
+  }
+  @keyframes footerHeartPulse {
+    0%,
+    100% {
+      transform: translateY(0.12em) scale(1);
+    }
+    50% {
+      transform: translateY(0.12em) scale(1.25);
+    }
+  }
+  .site-footer a {
+    color: var(--color-footer-text);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease,
+      text-shadow 0.3s ease;
+    padding-bottom: 1px;
+    font-weight: 500;
+    margin-left: 0.25em;
+  }
+  .site-footer a:hover {
+    color: var(--color-footer-link-hover);
+    border-bottom-color: var(--color-ember-orange-radiance-soft);
+    text-shadow: 0 0 5px var(--color-ember-orange-low-alpha);
+    outline: none;
+  }
+  .site-footer a:focus-visible {
+    outline: 2px solid var(--color-ember-orange-radiance-soft);
+    outline-offset: 2px;
+    border-bottom-color: transparent;
+  }
+
+  .sent-confirmation-light {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: transparent;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+    transition: opacity 0.4s ease-out,
+      transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 20;
+    pointer-events: none;
+  }
+  .sent-confirmation-light.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    animation: sentLightPulseEffectV2 1.6s ease-out forwards;
+  }
+  @keyframes sentLightPulseEffectV2 {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.2);
+      box-shadow: 0 0 0 0 var(--sent-light-core),
+        0 0 0 0 var(--sent-light-mid-glow),
+        0 0 0 0 var(--sent-light-outer-glow);
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+      box-shadow: 0 0 15px 5px var(--sent-light-core),
+        0 0 35px 15px var(--sent-light-mid-glow),
+        0 0 60px 30px var(--sent-light-outer-glow),
+        0 0 90px 45px var(--sent-light-faintest-glow);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(1.3);
+      box-shadow: 0 0 5px 2px var(--sent-light-core),
+        0 0 10px 5px var(--sent-light-mid-glow),
+        0 0 15px 8px var(--sent-light-outer-glow);
+    }
+  }
+
+  .toast-notification {
+    position: fixed;
+    left: 50%;
+    top: 3.2rem;
+    transform: translateX(-50%) translateY(-200%);
+    opacity: 0;
+    background: linear-gradient(140deg, #423835, #2a221f);
+    color: #f0e0d8;
+    padding: 0.8rem 1.3rem;
+    border-radius: 9px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-align: center;
+    z-index: 10000;
+    min-width: 260px;
+    max-width: calc(100% - 1.5rem);
+    box-shadow: 3.5px 3.5px 9px rgba(0, 0, 0, 0.25),
+      -2px -2px 6px rgba(255, 255, 255, 0.02),
+      inset 0.8px 0.8px 0.8px rgba(255, 255, 255, 0.015),
+      inset -0.8px -0.8px 0.8px rgba(0, 0, 0, 0.07);
+    transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.1),
+      opacity 0.35s ease-out;
+    display: none;
+    border: 1px solid rgba(255, 255, 255, 0.035);
+  }
+  .toast-notification.toast--error {
+    background: linear-gradient(140deg, #692c28, #4a1e1a);
+    color: #ffd8d4;
+  }
+  .toast-notification.toast--success {
+    background: linear-gradient(140deg, #325542, #20382c);
+    color: #d4ffe8;
+  }
+  .toast-notification.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    display: block !important;
+  }
+
+  @media (max-width: 600px) {
+    :root {
+      --panel-extrusion-offset: var(--panel-extrusion-offset-mobile);
+      --panel-extrusion-blur: var(--panel-extrusion-blur-mobile);
+      --letter-spacing-hero: 0.008em;
+      --letter-spacing-button: 0.018em;
+    }
+    body {
+      padding: 0.6rem;
+      padding-bottom: calc(
+        0.8rem + env(safe-area-inset-bottom, 0px) + 55px
+      );
+    }
+    .content-panel {
+      min-height: clamp(350px, 55vh, 480px);
+      padding: clamp(1.8rem, 6vh, 3rem) clamp(0.7rem, 3.5vw, 1.3rem);
+      margin-bottom: 0.8rem;
+      border-radius: clamp(30px, 8vw, 60px);
+    }
+    .hero-message {
+      font-size: clamp(1.3rem, 4vw, 1.6rem);
+      margin-bottom: clamp(1.4rem, 5vh, 2rem);
+    }
+    .message-textarea {
+      min-height: clamp(90px, 17vh, 130px);
+      font-size: clamp(0.78rem, 2.2vw, 0.88rem);
+      padding: 0.8rem;
+    }
+    .send-button-wrapper {
+      margin-top: clamp(1rem, 3.8vh, 1.6rem);
+    }
+    .button {
+      min-width: 130px;
+      padding: 11px 18px;
+      height: 46px;
+      font-size: 14px;
+      --new-button-radius: 12px;
+    }
+    .site-footer {
+      padding-top: calc(0.6rem + 4px);
+      padding-left: 0.4rem;
+      padding-right: 0.4rem;
+      padding-bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px));
+      gap: 0.15em;
+      font-size: clamp(0.62rem, 1.8vw, 0.68rem);
+    }
+    .toast-notification {
+      top: 1.2rem;
+      padding: 0.75rem 1.1rem;
+      font-size: 0.8rem;
+    }
+  }
+  @media (max-width: 375px) {
+    body {
+      padding: 0.5rem;
+      padding-bottom: calc(
+        0.6rem + env(safe-area-inset-bottom, 0px) + 50px
+      );
+    }
+    .content-panel {
+      padding: clamp(1.5rem, 5vh, 2.5rem) clamp(0.6rem, 3vw, 1rem);
+      min-height: auto;
+      border-radius: clamp(25px, 7vw, 50px);
+    }
+    .hero-message {
+      font-size: clamp(1.2rem, 3.8vw, 1.5rem);
+      margin-bottom: clamp(1.2rem, 4.5vh, 1.8rem);
+    }
+    .message-textarea {
+      font-size: clamp(0.75rem, 2.1vw, 0.85rem);
+      min-height: 80px;
+      padding: 0.7rem;
+    }
+    .send-button-wrapper {
+      margin-top: clamp(0.8rem, 3.5vh, 1.4rem);
+    }
+    .button {
+      min-width: 120px;
+      padding: 10px 16px;
+      height: 42px;
+      font-size: 13px;
+      --new-button-radius: 10px;
+    }
+    .site-footer {
+      font-size: 0.6rem;
+      gap: 0.1em;
+    }
+  }
+  @media (max-width: 320px) {
+    .hero-message {
+      font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+    }
+    .button {
+      padding: 9px 14px;
+      height: 40px;
+      font-size: 12px;
+    }
+  }
+</style>
+
+  </head>
+  <body>
+    <div class="genesis-container">
+      <div class="genesis-particle"></div>
+      <div class="genesis-particle"></div>
+      <div class="genesis-particle"></div>
+      <div class="genesis-particle"></div>
+    </div>
+    <div class="particle-container" id="particleContainer"></div>
+    <div class="light-shard-container" id="lightShardContainer"></div>
+    <div class="sent-confirmation-light" id="sentConfirmationLight"></div>
+
+<main class="content-panel" id="contentPanel">
+  <h1 class="hero-message">
+    This place was <span class="ash-text">shadows</span><br />
+    Until your
+    <span class="ember-glow" id="emberGlowWord">light</span> found it.
+  </h1>
+  <form class="message-form" id="messageForm">
+    <div class="message-textarea-wrapper">
+      <textarea
+        class="message-textarea"
+        name="message"
+        placeholder="Let another light in…" /* MODIFIED */
+        aria-label="Anonymous message input"
+        required
+      ></textarea>
+    </div>
+    <div class="send-button-wrapper">
+      <button class="button" type="submit" id="sendButton">
+        <div class="outline"></div>
+        <div class="state state--default">
+          <div class="icon">
+            <svg
+              width="1em"
+              height="1em"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g filter="url(#shadowSendButtonUiverse)">
+                <path
+                  d="M14.2199 21.63C13.0399 21.63 11.3699 20.8 10.0499 16.83L9.32988 14.67L7.16988 13.95C3.20988 12.63 2.37988 10.96 2.37988 9.78001C2.37988 8.61001 3.20988 6.93001 7.16988 5.60001L15.6599 2.77001C17.7799 2.06001 19.5499 2.27001 20.6399 3.35001C21.7299 4.43001 21.9399 6.21001 21.2299 8.33001L18.3999 16.82C17.0699 20.8 15.3999 21.63 14.2199 21.63ZM7.63988 7.03001C4.85988 7.96001 3.86988 9.06001 3.86988 9.78001C3.86988 10.5 4.85988 11.6 7.63988 12.52L10.1599 13.36C10.3799 13.43 10.5599 13.61 10.6299 13.83L11.4699 16.35C12.3899 19.13 13.4999 20.12 14.2199 20.12C14.9399 20.12 16.0399 19.13 16.9699 16.35L19.7999 7.86001C20.3099 6.32001 20.2199 5.06001 19.5699 4.41001C18.9199 3.76001 17.6599 3.68001 16.1299 4.19001L7.63988 7.03001Z"
+                  fill="currentColor"
+                ></path>
+                <path
+                  d="M10.11 14.4C9.92005 14.4 9.73005 14.33 9.58005 14.18C9.29005 13.89 9.29005 13.41 9.58005 13.12L13.16 9.53C13.45 9.24 13.93 9.24 14.22 9.53C14.51 9.82 14.51 10.3 14.22 10.59L10.64 14.18C10.5 14.33 10.3 14.4 10.11 14.4Z"
+                  fill="currentColor"
+                ></path>
+              </g>
+              <defs>
+                <filter
+                  id="shadowSendButtonUiverse"
+                  x="-10%"
+                  y="-10%"
+                  width="120%"
+                  height="130%"
+                >
+                  <feDropShadow
+                    dx="0"
+                    dy=".7"
+                    stdDeviation=".4"
+                    flood-color="var(--new-button-icon-color)"
+                    flood-opacity=".25"
+                  />
+                </filter>
+              </defs>
+            </svg>
+          </div>
+          <p>
+            <span style="--i: 0">S</span><span style="--i: 1">e</span
+            ><span style="--i: 2">n</span
+            ><span style="--i: 3">d</span> <span style="--i: 4">N</span
+            ><span style="--i: 5">o</span><span style="--i: 6">w</span>
+          </p>
+        </div>
+        <div class="state state--sent">
+          <div class="icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              height="1em"
+              width="1em"
+            >
+              <g filter="url(#shadowSentIconUiverse)">
+                <path
+                  fill="currentColor"
+                  d="M12 22.75C6.07 22.75 1.25 17.93 1.25 12C1.25 6.07 6.07 1.25 12 1.25C17.93 1.25 22.75 6.07 22.75 12C22.75 17.93 17.93 22.75 12 22.75ZM12 2.75C6.9 2.75 2.75 6.9 2.75 12C2.75 17.1 6.9 21.25 12 21.25C17.1 21.25 21.25 17.1 21.25 12C21.25 6.9 17.1 2.75 12 2.75Z"
+                ></path>
+                <path
+                  fill="currentColor"
+                  d="M10.5795 15.5801C10.3795 15.5801 10.1895 15.5001 10.0495 15.3601L7.21945 12.5301C6.92945 12.2401 6.92945 11.7601 7.21945 11.4701C7.50945 11.1801 7.98945 11.1801 8.27945 11.4701L10.5795 13.7701L15.7195 8.6301C16.0095 8.3401 16.4895 8.3401 16.7795 8.6301C17.0695 8.9201 17.0695 9.4001 16.7795 9.6901L11.1095 15.3601C10.9695 15.5001 10.7795 15.5801 10.5795 15.5801Z"
+                ></path>
+              </g>
+              <defs>
+                <filter
+                  id="shadowSentIconUiverse"
+                  x="-10%"
+                  y="-10%"
+                  width="120%"
+                  height="130%"
+                >
+                  <feDropShadow
+                    dx="0"
+                    dy=".5"
+                    stdDeviation=".3"
+                    flood-color="var(--primary)"
+                    flood-opacity=".4"
+                  />
+                </filter>
+              </defs>
+            </svg>
+          </div>
+          <p>
+            <span style="--i: 0">S</span><span style="--i: 1">e</span
+            ><span style="--i: 2">n</span><span style="--i: 3">t</span
+            ><span style="--i: 4">!</span>
+          </p>
+        </div>
+      </button>
+    </div>
+  </form>
+</main>
+
+<footer class="site-footer">
+  <span class="coded-by"
+    >Coded with <span class="heart-icon">❤️</span> by</span
+  >
+  <a
+    class="linkedin-link"
+    href="https://www.linkedin.com/in/xxvista/"
+    target="_blank"
+    rel="noopener noreferrer"
+    >Abdellah</a
+  >
+</footer>
+<div id="toast" class="toast-notification"></div>
+
+<script>
+  const messageForm = document.getElementById("messageForm");
+  const textarea = document.querySelector(".message-textarea");
+  const sendButton = document.getElementById("sendButton");
+  const particleContainer = document.getElementById("particleContainer");
+  const lightShardContainer = document.getElementById(
+    "lightShardContainer"
+  );
+  const contentPanel = document.getElementById("contentPanel");
+  const siteFooter = document.querySelector(".site-footer");
+  const toastElement = document.getElementById("toast");
+  const emberGlowWord = document.getElementById("emberGlowWord");
+  const sentConfirmationLight = document.getElementById(
+    "sentConfirmationLight"
+  );
+  const bodyElement = document.body;
+  let toastTimeout;
+
+  function triggerHapticFeedback(type = "light") {
+    if (navigator.vibrate) {
+      if (type === "success") navigator.vibrate([35, 20, 60]);
+      else if (type === "click") navigator.vibrate(15);
+      else navigator.vibrate(7);
+    }
+  }
+
+  textarea.addEventListener("focus", () =>
+    textarea.parentElement.classList.add("focused")
+  );
+  textarea.addEventListener("blur", () =>
+    textarea.parentElement.classList.remove("focused")
+  );
+
+  function showToast(message, type = "error") {
+    if (!toastElement) return;
+    clearTimeout(toastTimeout);
+    toastElement.textContent = message;
+    toastElement.className = "toast-notification";
+    toastElement.style.display = "block";
+    toastElement.classList.add(`toast--${type}`);
+    toastElement.classList.add("show");
+    toastTimeout = setTimeout(() => {
+      toastElement.classList.remove("show");
+      setTimeout(() => {
+        if (!toastElement.classList.contains("show")) {
+          /* CSS handles fade out, no direct display:none needed here */
+        }
+      }, 380);
+    }, 2800);
+  }
+
+  function createVCurrentParticles(count = 28, mode = "normal") {
+    if (!particleContainer) return;
+    particleContainer.innerHTML = "";
+    particleContainer.className = "particle-container";
+    if (mode === "celestial-dust") {
+      particleContainer.classList.add("celestial-dust");
+      count = 40;
+    }
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement("div");
+      p.classList.add("particle");
+      p.style.left = `${2 + Math.random() * 96}%`;
+      const dur =
+        (mode === "celestial-dust" ? 3.8 : 5.5) +
+        Math.random() * (mode === "celestial-dust" ? 3.8 : 8);
+      Object.assign(p.style, {
+        animationDelay: `${Math.random() * dur}s`,
+        animationDuration: `${dur}s`,
+        width: `${
+          (mode === "celestial-dust" ? 1.3 : 0.45) +
+          Math.random() * (mode === "celestial-dust" ? 1.3 : 1)
+        }px`,
+      });
+      p.style.height = p.style.width;
+      p.style.setProperty(
+        "--x-start",
+        `${(Math.random() - 0.5) * (mode === "celestial-dust" ? 30 : 50)}px`
+      );
+      p.style.setProperty(
+        "--x-end",
+        `${
+          (Math.random() - 0.5) * (mode === "celestial-dust" ? 80 : 130)
+        }px`
+      );
+      p.style.setProperty("--s-start", `${0.07 + Math.random() * 0.11}`);
+      p.style.setProperty("--s-end", `${0.22 + Math.random() * 0.2}`);
+      p.style.setProperty(
+        "--o-peak",
+        `${
+          (mode === "celestial-dust" ? 0.35 : 0.16) +
+          Math.random() * (mode === "celestial-dust" ? 0.28 : 0.16)
+        }`
+      );
+      particleContainer.appendChild(p);
+    }
+    particleContainer.classList.add("active");
+  }
+
+  // ENHANCEMENT: More varied light shards
+  function createLightShards(count = 30) {
+    if (!lightShardContainer) return;
+    lightShardContainer.innerHTML = "";
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    for (let i = 0; i < count; i++) {
+      const shard = document.createElement("div");
+      shard.classList.add("light-shard");
+      const width = 0.7 + Math.random() * 2.3;
+      const height = 60 + Math.random() * 150;
+      const startX = vw * 0.2 + Math.random() * (vw * 0.6);
+      const startY = vh + Math.random() * 25 + 15;
+      const endX = startX + (Math.random() - 0.5) * (vw * 0.12);
+      const endY = -height - Math.random() * 130 - 70;
+      const startRotate = (Math.random() - 0.5) * 10;
+      const endRotate = startRotate + (Math.random() - 0.5) * 12;
+      const duration = 3.2 + Math.random() * 2.8;
+      Object.assign(shard.style, {
+        width: `${width}px`,
+        height: `${height}px`,
+        animationDelay: `${Math.random() * 0.6}s`,
+        animationDuration: `${duration}s`,
+      });
+      shard.style.setProperty("--shard-tx-start", `${startX}px`);
+      shard.style.setProperty("--shard-ty-start", `${startY}px`);
+      shard.style.setProperty("--shard-tx-end", `${endX}px`);
+      shard.style.setProperty("--shard-ty-end", `${endY}px`);
+      shard.style.setProperty("--shard-rotate-start", `${startRotate}deg`);
+      shard.style.setProperty("--shard-rotate-end", `${endRotate}deg`);
+      shard.style.setProperty(
+        "--shard-opacity-peak",
+        `${0.6 + Math.random() * 0.3}`
+      );
+      shard.style.setProperty(
+        "--shard-scale-start",
+        `${0.25 + Math.random() * 0.35}`
+      );
+      shard.style.setProperty(
+        "--shard-scale-end",
+        `${0.08 + Math.random() * 0.1}`
+      );
+      lightShardContainer.appendChild(shard);
+      setTimeout(() => shard.remove(), duration * 1e3 + 600);
+    }
+  }
+
+  function setButtonState(state) {
+    sendButton.classList.remove(
+      "js-button-sending",
+      "js-button-sent",
+      "sacred-confirmation"
+    );
+    sendButton.disabled = !1;
+    const defaultStateEl = sendButton.querySelector(".state--default");
+    const sentStateEl = sendButton.querySelector(".state--sent");
+    if (!defaultStateEl || !sentStateEl) {
+      console.error("Button state elements not found!");
+      return;
+    }
+    defaultStateEl.style.cssText = "display: none !important;";
+    sentStateEl.style.cssText = "display: none !important;";
+    sendButton.style.opacity = "1";
+    if (state === "sending") {
+      sendButton.classList.add("js-button-sending");
+      defaultStateEl.style.cssText = "display: flex !important;";
+      sendButton.disabled = !0;
+    } else if (state === "sent_brief_confirmation") {
+      sendButton.classList.add("js-button-sent", "sacred-confirmation");
+      sentStateEl.style.cssText = "display: flex !important;";
+      sendButton.disabled = !0;
+    } else if (state === "sent_hidden_for_panel_fade_out") {
+      sendButton.style.opacity = "0";
+      sendButton.disabled = !0;
+    } else {
+      defaultStateEl.style.cssText = "display: flex !important;";
+    }
+  }
+
+  function animateTextToMotes() {
+    return new Promise((resolve) => {
+      const text = textarea.value;
+      if (!text.trim()) {
+        resolve();
+        return;
+      }
+      textarea.classList.add("clearing-for-motes");
+      let moteContainer =
+        textarea.parentElement.querySelector(".mote-container");
+      if (!moteContainer) {
+        moteContainer = document.createElement("div");
+        moteContainer.className = "mote-container";
+        textarea.parentElement.appendChild(moteContainer);
+      }
+      moteContainer.innerHTML = "";
+      const lines = text.split("\n");
+      const lineHeight =
+        parseFloat(getComputedStyle(textarea).lineHeight) || 19;
+      const padding =
+        parseFloat(getComputedStyle(textarea).paddingTop) || 9;
+      let charCount = 0;
+      let totalDelay = 0;
+      lines.forEach((line, lineIndex) => {
+        for (let i = 0; i < line.length; i++) {
+          if (line[i] === " ") continue;
+          const mote = document.createElement("div");
+          mote.className = "mote";
+          const approxX = i * 7 + padding + (Math.random() - 0.5) * 4;
+          const approxY =
+            lineIndex * lineHeight + padding + (Math.random() - 0.5) * 4;
+          mote.style.left = `${Math.min(
+            Math.max(approxX, padding),
+            textarea.clientWidth - padding - 4
+          )}px`;
+          mote.style.top = `${Math.min(
+            Math.max(approxY, padding),
+            textarea.clientHeight - padding - 4
+          )}px`;
+          const driftX = (Math.random() - 0.5) * 40;
+          mote.style.setProperty("--mote-drift-x", `${driftX}px`);
+          const delay = charCount * 8;
+          mote.style.animationDelay = `${delay}ms`;
+          totalDelay = Math.max(totalDelay, delay + 700);
+          moteContainer.appendChild(mote);
+          charCount++;
+        }
+      });
+      setTimeout(() => {
+        textarea.value = "";
+        textarea.classList.remove("clearing-for-motes");
+        if (moteContainer) moteContainer.innerHTML = "";
+        resolve();
+      }, totalDelay + 20);
+    });
+  }
+
+  function animateLightAscend() {
+    return new Promise((resolve) => {
+      if (!sendButton || !emberGlowWord) {
+        resolve();
+        return;
+      }
+      const wisp = document.createElement("div");
+      wisp.className = "light-ascend-wisp";
+      wisp.style.opacity = "0";
+      document.body.appendChild(wisp);
+      requestAnimationFrame(() => {
+        const btnR = sendButton.getBoundingClientRect();
+        const lWR = emberGlowWord.getBoundingClientRect();
+        const sX = btnR.left + btnR.width / 2;
+        const sY = btnR.top + btnR.height / 2;
+        const eX = lWR.left + lWR.width / 2;
+        const eY = lWR.top + lWR.height / 2;
+        const c1X = sX + (eX - sX) * 0.25 + (Math.random() - 0.5) * 25;
+        const c1Y = sY + (eY - sY) * 0.45 - 35 - Math.random() * 25;
+        const c2X = sX + (eX - sX) * 0.75 + (Math.random() - 0.5) * 20;
+        const c2Y = sY + (eY - sY) * 0.55 - 20 - Math.random() * 20;
+        wisp.style.setProperty("--start-x", `${sX}px`);
+        wisp.style.setProperty("--start-y", `${sY}px`);
+        wisp.style.setProperty("--mid-x-1", `${c1X}px`);
+        wisp.style.setProperty("--mid-y-1", `${c1Y}px`);
+        wisp.style.setProperty("--mid-x-2", `${c2X}px`);
+        wisp.style.setProperty("--mid-y-2", `${c2Y}px`);
+        wisp.style.setProperty("--end-x", `${eX}px`);
+        wisp.style.setProperty("--end-y", `${eY}px`);
+        wisp.style.animation = `lightWispTravel .5s cubic-bezier(.35,.1,.65,.95) forwards`;
+        setTimeout(() => {
+          wisp.remove();
+          resolve();
+        }, 500);
+      });
+    });
+  }
+
+  async function triggerVistaEncore() {
+    contentPanel.classList.remove("panel-fade-out-radiance");
+    contentPanel.style.animation = "";
+    contentPanel.style.display = "";
+    contentPanel.style.opacity = "1";
+    void contentPanel.offsetWidth;
+    contentPanel.classList.add("no-hover-effect");
+    textarea.blur();
+    setButtonState("sending");
+    const lightAscendPromise = animateLightAscend();
+    contentPanel.classList.add("encore-flash");
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    if (emberGlowWord) emberGlowWord.classList.add("grand-radiance");
+    await new Promise((r) => setTimeout(r, 450));
+    setButtonState("sent_brief_confirmation");
+    triggerHapticFeedback("success");
+    await new Promise((r) => setTimeout(r, 1100));
+    contentPanel.classList.remove("encore-flash");
+    if (emberGlowWord) emberGlowWord.classList.remove("grand-radiance");
+    const textClearPromise = animateTextToMotes();
+    await textClearPromise;
+    setButtonState("sent_hidden_for_panel_fade_out");
+    contentPanel.classList.add("panel-fade-out-radiance");
+    const panelFadeOutDuration =
+      parseFloat(
+        getComputedStyle(document.documentElement)
+          .getPropertyValue("--panel-animation-duration-val")
+          .trim() || "1.2s"
+      ) * 1e3;
+    const sentLightActivationDelay = panelFadeOutDuration * 0.7;
+    const sentLightVisibleDuration = 1600;
+    setTimeout(() => {
+      if (sentConfirmationLight)
+        sentConfirmationLight.classList.add("active");
+    }, sentLightActivationDelay);
+    await new Promise((r) => setTimeout(r, panelFadeOutDuration));
+    contentPanel.style.display = "none";
+    bodyElement.style.backgroundColor =
+      "rgba(var(--color-ember-orange-rgb), 0.05)";
+    createLightShards();
+    createVCurrentParticles(25, "celestial-dust");
+    const totalSentAtmosphereDuration = Math.max(
+      sentLightVisibleDuration + 200,
+      1700
+    );
+    await new Promise((r) => setTimeout(r, totalSentAtmosphereDuration));
+    if (sentConfirmationLight)
+      sentConfirmationLight.classList.remove("active");
+    if (lightShardContainer)
+      setTimeout(() => {
+        lightShardContainer.innerHTML = "";
+      }, 150);
+    bodyElement.style.backgroundColor = "";
+    createVCurrentParticles();
+    contentPanel.classList.remove("panel-fade-out-radiance");
+    contentPanel.style.animation = "none";
+    contentPanel.style.transformOrigin = "50% 75%";
+    contentPanel.style.display = "";
+    contentPanel.style.opacity = "0";
+    contentPanel.style.transform =
+      "perspective(1800px) translateY(3rem) rotateX(12deg) rotateY(-3deg) scale(0.88)";
+    void contentPanel.offsetWidth;
+    contentPanel.style.animation =
+      "panelSculptedSettle var(--panel-settle-duration) cubic-bezier(0.16, 1, 0.3, 1) 0.01s forwards";
+    await new Promise((r) => setTimeout(r, 60));
+    setButtonState("default");
+    contentPanel.classList.remove("no-hover-effect");
+    if (textarea.classList.contains("ember-filled-and-cleared")) {
+      textarea.classList.remove("ember-filled-and-cleared");
+      textarea.style.opacity = "";
+      textarea.style.transform = "";
+    }
+    const panelReSettleTime =
+      parseFloat(
+        getComputedStyle(document.documentElement)
+          .getPropertyValue("--panel-settle-duration")
+          .trim() || ".9s"
+      ) *
+        1e3 +
+      10;
+    if (textarea && document.activeElement !== textarea) {
+      setTimeout(
+        () => textarea.focus({ preventScroll: !0 }),
+        panelReSettleTime + 150
+      );
+    }
+  }
+
+  (function () {
+    if (contentPanel) contentPanel.style.opacity = "0";
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        setButtonState("default");
+        createVCurrentParticles();
+      });
+    } else {
+      setButtonState("default");
+      createVCurrentParticles();
+    }
+  })();
+
+  if (emberGlowWord) {
+    emberGlowWord.addEventListener("click", () => {
+      emberGlowWord.classList.add("ember-glow--activated");
+      triggerHapticFeedback("light");
+      setTimeout(() => {
+        emberGlowWord.classList.remove("ember-glow--activated");
+      }, 600);
+    });
+  }
+
+  messageForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    triggerHapticFeedback("click");
+    const messageContent = textarea.value.trim();
+    if (!messageContent) {
+      showToast("A whisper needs words to travel...", "error");
+      textarea.focus();
+      return;
+    }
+
+    // Trigger UI animations optimistically
+    const encorePromise = triggerVistaEncore(); 
+
+    // Send data to Formspree
+    const formData = new FormData(messageForm);
+    const formspreeEndpoint = "https://formspree.io/f/mjvqqzzj"; // YOUR ENDPOINT
+
+    try {
+      const response = await fetch(formspreeEndpoint, {
+        method: "POST",
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      // Wait for UI animation to complete regardless of Formspree outcome
+      // for a better user experience.
+      await encorePromise; 
+
+      if (!response.ok) {
+        // Formspree submission failed after UI animation completed
+        const errorData = await response.json().catch(() => ({})); // Try to parse error
+        let errorMessage = "Message delivery faced an unexpected shadow. Please try again later.";
+        if (errorData && errorData.errors && errorData.errors.length > 0) {
+          errorMessage = errorData.errors.map(err => err.message || "Submission error").join(", ");
+        } else if (response.statusText) {
+          errorMessage = `Error: ${response.statusText}`;
+        }
+        console.error("Formspree error after UI finale:", errorData, response.status);
+        // Show a toast, but the UI has already "succeeded" and reset.
+        // This error message is more for developer debugging or if critical to inform user.
+        // For this personal project, you might decide not to show a disruptive error *after* the beautiful finale.
+        showToast(errorMessage, "error"); 
+        // Note: At this point, the button is already reset to "default".
+        // If an error occurred *before* encorePromise resolved, 
+        // then setButtonState('default') inside the catch block would be more relevant.
+      } else {
+        console.log("Formspree submission successful.");
+        // UI already handled success.
+      }
+    } catch (error) {
+      console.error("Network error or Fetch failed during Formspree submission:", error);
+      // Wait for UI animation to complete before showing network error
+      await encorePromise;
+      showToast("A flicker in the connection. Please check and retry.", "error");
+      // Button state will be "default" after encorePromise resolves.
+    }
+  });
+</script>
+  </body>
+</html>
